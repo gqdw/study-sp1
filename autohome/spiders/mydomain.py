@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from autohome.itmes import AutohomeItem
 
-class MydomainItem(scrapy.Item):
-	title = scrapy.Field()
-	link = scrapy.Field()
-	desc = scrapy.Field()
 
 
 class MydomainSpider(scrapy.Spider):
@@ -17,6 +14,13 @@ class MydomainSpider(scrapy.Spider):
     )
 
     def parse(self, response):
-		filename = response.url.split("/")[-2] + '.html'
-		with open(filename, 'wb') as f:
-			f.write(response.body)
+		for sel in response.xpath('//ul/li')
+            item = AutohomeItem()
+            item['title'] = sel.xpath('a/text()').extract()
+            item['link'] = sel.xpath('a/@href').extract()
+            item['desc'] = sel.xpath('text()').extract()
+            yield item
+
+		# filename = response.url.split("/")[-2] + '.html'
+		# with open(filename, 'wb') as f:
+			# f.write(response.body)
