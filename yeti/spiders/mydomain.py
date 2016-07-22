@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from autohome.items import AutohomeItem
+from yeti.items import AutohomeItem
 
 
 
