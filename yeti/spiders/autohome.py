@@ -32,6 +32,9 @@ class AutohomeSpider(scrapy.Spider):
 			# type =  unicode
 #			print sel.xpath('@href').extract()[0]
 			#print type(sel.xpath('@href').extract()[0])
-			
 			f.write(website + sel.xpath('@href').extract()[0].encode('utf-8'))
+			item = AutohomeItem()
+			item['desc'] = sel.xpath('text()').extract()[0]
+			item['link'] = sel.xpath('@href').extract()[0]
+			yield item
 		f.close()
