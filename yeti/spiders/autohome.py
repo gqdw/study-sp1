@@ -12,6 +12,8 @@ class AutohomeSpider(scrapy.Spider):
     allowed_domains = ["autohome.com.cn"]
     start_urls = (
 		"http://club.autohome.com.cn/bbs/forum-c-3013-1.html",
+		"http://club.autohome.com.cn/bbs/forum-c-3013-2.html",
+		"http://club.autohome.com.cn/bbs/forum-c-3013-3.html",
 #        "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
     
     )
@@ -22,6 +24,7 @@ class AutohomeSpider(scrapy.Spider):
     def parse(self, response):
 		today = datetime.datetime.today()
 		filename = 'yeti-' + today.strftime('%Y%m%d-%H%S') + '.log'
+		website = 'http://club.autohome.com.cn'
 		f = open(filename, 'a')
 		for sel in response.selector.xpath('//dt/a'):
 #			print sel.xpath('text()').extract()[0]
@@ -29,5 +32,6 @@ class AutohomeSpider(scrapy.Spider):
 			# type =  unicode
 #			print sel.xpath('@href').extract()[0]
 			#print type(sel.xpath('@href').extract()[0])
-			f.write(sel.xpath('@href').extract()[0].encode('utf-8'))
+			
+			f.write(website + sel.xpath('@href').extract()[0].encode('utf-8'))
 		f.close()
