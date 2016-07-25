@@ -2,6 +2,7 @@
 import scrapy
 # from items import AutohomeItem
 from yeti.items import AutohomeItem
+import datetime
 # from autohome.items import AutohomeItem
 # from tutorial.items import DmozItem
 
@@ -19,7 +20,9 @@ class AutohomeSpider(scrapy.Spider):
 #	def parse(self, response):
 #		print response.selector.xpath('//dt/a').extract()
     def parse(self, response):
-		f = open('yeti.log', 'a')
+		today = datetime.datetime.today()
+		filename = 'yeti-' + today.strftime('%Y%m%d-%H%S') + '.log'
+		f = open(filename, 'a')
 		for sel in response.selector.xpath('//dt/a'):
 #			print sel.xpath('text()').extract()[0]
 			f.write(sel.xpath('text()').extract()[0].encode('utf-8'))
