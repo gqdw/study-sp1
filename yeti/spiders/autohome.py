@@ -19,22 +19,12 @@ class AutohomeSpider(scrapy.Spider):
 #	def parse(self, response):
 #		print response.selector.xpath('//dt/a').extract()
     def parse(self, response):
+		f = open('yeti.log', 'a')
 		for sel in response.selector.xpath('//dt/a'):
-			print sel.xpath('text()').extract()
-			print sel.xpath('@href').extract()
-#		# for sel in response.xpath('//ul/li'):
-##		filename = response.url.split("/")[-2] + '.html'
-#		for sel in response.selector.xpath('//dt/a'):
-#		# for sel in response.selector.xpath('//dt/a').extract():
-#		# for sel in response.selector.xpath('//dt/a/text()').extract():
-#			print sel
-#			item = AutohomeItem()
-#			item['title'] = sel.xpath('.a/text()').extract()
-##			print item['title']
-#			item['link'] = sel.xpath('.a/@href').extract()
-##			print item['link']
-##			item['desc'] = sel.xpath('text()').extract()
-##			with open(filename, 'wb') as f:
-##				f.write(item['title'])
-#			yield item
-
+#			print sel.xpath('text()').extract()[0]
+			f.write(sel.xpath('text()').extract()[0].encode('utf-8'))
+			# type =  unicode
+#			print sel.xpath('@href').extract()[0]
+			#print type(sel.xpath('@href').extract()[0])
+			f.write(sel.xpath('@href').extract()[0].encode('utf-8'))
+		f.close()
