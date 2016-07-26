@@ -14,6 +14,15 @@ class AutohomeSpider(scrapy.Spider):
 		"http://club.autohome.com.cn/bbs/forum-c-3013-1.html",
 		"http://club.autohome.com.cn/bbs/forum-c-3013-2.html",
 		"http://club.autohome.com.cn/bbs/forum-c-3013-3.html",
+# ruizhi
+		"http://club.autohome.com.cn/bbs/forum-c-375-1.html",
+		"http://club.autohome.com.cn/bbs/forum-c-375-2.html",
+		"http://club.autohome.com.cn/bbs/forum-c-375-3.html",
+# huangguan
+		"http://club.autohome.com.cn/bbs/forum-c-882-1.html",
+		"http://club.autohome.com.cn/bbs/forum-c-882-2.html",
+		"http://club.autohome.com.cn/bbs/forum-c-882-3.html",
+
 #        "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
     
     )
@@ -23,7 +32,7 @@ class AutohomeSpider(scrapy.Spider):
 #		print response.selector.xpath('//dt/a').extract()
     def parse(self, response):
 		today = datetime.datetime.today()
-		filename = 'yeti-' + today.strftime('%Y%m%d-%H%S') + '.log'
+		filename = 'autohome-' + today.strftime('%Y%m%d-%H%M%S') + '.log'
 		website = 'http://club.autohome.com.cn'
 		f = open(filename, 'a')
 		for sel in response.selector.xpath('//dt/a'):
